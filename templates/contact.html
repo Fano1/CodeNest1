@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us | SafeBites</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1e1e1e;
+      color: #fff;
+    }
+
+    .header {
+      background-color: #ff7043;
+      color: white;
+      padding: 30px 20px;
+      text-align: center;
+      border-bottom-left-radius: 30px;
+      border-bottom-right-radius: 30px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: #fff;
+      color: #000;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    }
+
+    .card h2 {
+      color: #ff7043;
+      margin-bottom: 10px;
+    }
+
+    a {
+      color: #ff7043;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+        .backBtn {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  background-color: #ff6b35;   /* Match your theme */
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 2px solid white;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 9999;
+  transition: background-color 0.3s ease;
+}
+
+.backBtn:hover {
+  background-color: #e65a2b;   /* Slightly darker on hover */
+}
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px;
+      }
+
+      .header h1 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+    <a class="backBtn" href="{{ url_for('main') }}">← Home</a>
+
+
+  <div class="header">
+    <h1>Contact SafeBites</h1>
+    <p>We'd love to hear from you!</p>
+  </div>
+
+  <div class="container">
+
+    <div class="card">
+      <h2>📧 Email Us</h2>
+      <ul>
+        <li><a href="mailto:shrawan.edu.117@gmail.com">shrawan.edu.117@gmail.com</a></li>
+        <li><a href="mailto:pyakurelgunjan@gamil.com">pyakurelgunjan@gamil.com</a></li>
+        <li><a href="mailto:dipsonkhdk9@gmail.com">dipsonkhdk9@gmail.com</a></li>
+        <li><a href="mailto:avinashyadav4854@gmail.com">avinashyadav4854@gmail.com</a></li>
+        <li><a href="mailto:ayushyush100@gmail.com">ayushyush100@gmail.com</a></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>📞 Call Us</h2>
+      <p><a href="tel:+9779826228728">+977 9826228728</a></p>
+    </div>
+
+  </div>
+
+</body>
+</html>
