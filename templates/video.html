@@ -34,6 +34,28 @@ body {
     margin-bottom: 10px;
 }
 
+
+        .backBtn {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  background-color: #ff6b35;   /* Match your theme */
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border: 2px solid white;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 9999;
+  transition: background-color 0.3s ease;
+}
+
+.backBtn:hover {
+  background-color: #e65a2b;   /* Slightly darker on hover */
+}
+
 img {
     border: 2px solid white;
     border-radius: 2%;
@@ -44,7 +66,7 @@ img {
   </style>
 </head>
 <body>
-  
+      <a class="backBtn" href="{{ url_for('main') }}">← Home</a>
   <div class="video-container">
     <div class="title">Live Camera with Blue Circle</div>
     <img src="{{ url_for('video_feed') }}" alt="Live stream">

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food & Health</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #1e1e1e;
+      color: #ffffff;
+    }
+
+    header {
+      background-color: #ba3b04;
+      color: white;
+      padding: 10px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+
+    .logo img {
+      height: 40px;
+      width: auto;
+      margin-right: 10px;
+    }
+
+    nav {
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: white;
+      padding: 10px 14px;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    nav a:hover {
+      background-color: #d64203;
+    }
+
+    .container {
+      padding: 40px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card {
+      background-color: #2b2b2b;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      padding: 25px;
+      margin-bottom: 30px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    }
+
+    .card h2 {
+      color: #ff7b00;
+    }
+
+    .card p {
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="/hakathon/photo/Screenshot%202025-06-05%20184847.png" alt="SafeBites Logo">
+      SafeBites
+    </div>
+    <nav>
+      <a href="{{ url_for('main') }}">Home</a>
+      <a href="{{ url_for('maps') }}">Map</a>
+      <a href="{{ url_for('about') }}">About</a>
+      <a href="{{ url_for('ai') }}">Ai</a>
+      <a href="{{ url_for('video') }}">Video</a>
+      <a href="{{ url_for('contact') }}">Contact</a>
+      <a href="{{ url_for('index') }}">Remote</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <h2>Why Healthy Food Matters</h2>
+      <p>Healthy food provides the nutrients your body needs to maintain energy levels, support immune function, and promote overall well-being. Eating a balanced diet can help prevent chronic diseases and support a longer, happier life.</p>
+    </div>
+
+    <div class="card">
+      <h2>Top Nutrients for Daily Life</h2>
+      <p>Include proteins, vitamins, minerals, healthy fats, and fiber in your meals. Foods like leafy greens, whole grains, nuts, fruits, and lean proteins are essential for keeping your body strong and your mind sharp.</p>
+    </div>
+
+    <div class="card">
+      <h2>Fun Facts About Food</h2>
+      <p>Did you know that bananas can help reduce stress and boost your mood? Or that avocados are rich in heart-healthy fats? Exploring the benefits of each food can make your eating habits more exciting and meaningful!</p>
+    </div>
+  </div>
+</body>
+</html>
