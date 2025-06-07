@@ -1,7 +1,7 @@
 from PIL import Image
 from google import genai
 
-key = 'AIzaSyBn7NdfAQbhbjorEfkTmoTdRRr8wg3A-_M'
+key = 'your key'
 
 
 client = genai.Client(api_key=key)
