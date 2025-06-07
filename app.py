@@ -1,9 +1,14 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory, session, redirect, url_for, session, Response
 from werkzeug.utils import secure_filename
+from ultralytics import YOLO
 import sqlite3
 import os
 import cv2
 from AIshit.genAi import ProtocolGenerateContent
+import ctypes
+
+mymessage = 'A Mice is found'
+title = 'Popup window'
 
 app = Flask(__name__)
 app.secret_key = 'something_secure'
@@ -18,27 +23,39 @@ app.config['TEMP_UPLOAD_FOLDER'] = TEMP_UPLOAD_FOLDER
 os.makedirs(TEMP_UPLOAD_FOLDER, exist_ok=True)
 
 camera = cv2.VideoCapture(0)
+model = YOLO('AIshit\\my_model.pt')
 
-def gen_frames():
+def generate_frames():
     while True:
         success, frame = camera.read()
         if not success:
             break
-        else:
-            # Get frame dimensions
-            height, width, _ = frame.shape
-            center_x, center_y = width // 2, height // 2
+        
+        # Run YOLO inference
+        results = model(frame)[0]
+        
+        # Draw boxes and confidences
+        for box in results.boxes:
+            conf = box.conf[0].item()
+            if conf > 0.8:
+                print("hello world")
+                ctypes.windll.user32.MessageBoxW(0, mymessage, title, 0)
+            
+            if conf > 0:
+                x1, y1, x2, y2 = map(int, box.xyxy[0])
+                cv2.rectangle(frame, (x1, y1), (x2, y2), (255, 107, 53), 2)  # #ff6b35 color approx
+                label = f'{conf*100:.1f}%'
+                    
 
-            # Draw a blue circle in the center
-            cv2.circle(frame, (center_x, center_y), 40, (255, 0, 0), 4)  # BGR color
-
-            # Encode frame as JPEG
-            ret, buffer = cv2.imencode('.jpg', frame)
-            frame = buffer.tobytes()
-
-            # Yield frame
-            yield (b'--frame\r\n'
-                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+                cv2.putText(frame, label, (x1, y1 - 10),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 107, 53), 2)
+        
+        # Encode frame as JPEG
+        ret, buffer = cv2.imencode('.jpg', frame)
+        frame_bytes = buffer.tobytes()
+        
+        yield (b'--frame\r\n'
+               b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
 
 # Database init
 def init_db():
@@ -118,10 +135,22 @@ def ai():
     image_url = session.pop('image_url', None)
 
     return render_template('ai.html', output_text=output_text, image_url=image_url)
-    
+
+
+#hopefully full video code
 @app.route('/video')
 def video():
     return render_template('video.html')
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/video/stop_camera')
+def stop_camera():
+    if camera.isOpened():
+        camera.release()
+    return redirect(url_for('main'))
 
 
 #additional functions
@@ -183,11 +212,6 @@ def temp_uploaded_file(filename):
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['PERM_UPLOAD_FOLDER'], filename)
-
-
-@app.route('/video/video_feed')
-def video_feed():
-    return Response(gen_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 
 if __name__ == '__main__':
